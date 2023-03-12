@@ -14,12 +14,13 @@ const envSchema = z.object({
     .enum(['development', 'test', 'production'])
     .default('development'),
   DATABASE_URL: z.string(),
+  DATABASE_CLIENT: z.enum(['sqlite', 'pg']),
   DATABASE_PORT: z.string().default('3006'),
   DATABASE_USERNAME: z.string().default('root'),
   DATABASE_PASSWORD: z.string().default(''),
   DATABASE_NAME: z.string().default('projeto_2'),
   SECRET: z.string(),
-  PORT: z.string(),
+  PORT: z.coerce.number().default(3333),
 })
 
 const _env = envSchema.safeParse(process.env)
